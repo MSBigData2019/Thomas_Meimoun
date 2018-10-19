@@ -14,6 +14,8 @@ Villes = []
 Points = []
 Trash = []
 dist = []
+Distance = []
+Result = []
 
 Villes50 = 'http://www.linternaute.com/ville/classement/villes/population' #50 plus grandes villes de 2015
 req = requests.get(Villes50)
@@ -28,12 +30,16 @@ for i in range(0,50):
    Trash.append(Villes[i].split()) 
    Points.append(Trash[i][0])
    
-   
-URL2 = 'https://fr.distance.to/Paris/Marseille'
-req2 = requests.get(URL2)
-soup2 = BeautifulSoup(req2.text, "lxml")
-
-for sub_head in soup2.find_all('span'):
-    dist.append(sub_head) 
-
+for ville1 in Points:
+    for ville2 in Points:
+        a = ville1
+        b = ville2
+        Url = 'https://fr.distance.to/'+ a + '/' + b #50 plus grandes villes de 2015
+        requ = requests.get(Url)
+        soupe = BeautifulSoup(requ.text, "lxml")
+        
+        for b in soupe.find_all('span'):
+            dist.append(b.text)
+            
+        print(ville1+' '+ville2+' '+dist[27])
 #https://www.annuaire-mairie.fr/distance-paris.html

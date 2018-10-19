@@ -30,16 +30,16 @@ for i in range(0,50):
    Trash.append(Villes[i].split()) 
    Points.append(Trash[i][0])
    
-for ville1 in Points:
-    for ville2 in Points:
-        a = ville1
-        b = ville2
-        Url = 'https://fr.distance.to/'+ a + '/' + b #50 plus grandes villes de 2015
+for i in range (0, len(Points)):
+    for j in range (0, len(Points)):
+        a = Points[i]
+        b = Points[j]
+        Url = f'https://fr.distance.to/{a}/{b}' #50 plus grandes villes de 2015
         requ = requests.get(Url)
         soupe = BeautifulSoup(requ.text, "lxml")
         
         for b in soupe.find_all('span'):
             dist.append(b.text)
-            
-        print(ville1+' '+ville2+' '+dist[27])
+         
+        print(str(a)+' '+str(b)+' '+dist[27])
 #https://www.annuaire-mairie.fr/distance-paris.html
